@@ -169,6 +169,6 @@ extern "C" {
     init,       // init
     nullptr,    // deinit
     start,      // start
-    nullptr,    // stop
+    nullptr     // stop
   };
 }

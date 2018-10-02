@@ -67,8 +67,8 @@ static bool have_cache_password(const PasswordKey &key) {
   return fabric_cache_passwords.find(key) != fabric_cache_passwords.end();
 }
 
-static int init(const mysql_harness::AppInfo *info) {
-  g_app_info = info;
+static void init(mysql_harness::PluginFuncEnv* env) {
+  g_app_info = get_app_info(env);
 
   if (info && info->config) {
 
@@ -127,7 +127,8 @@ static int init(const mysql_harness::AppInfo *info) {
   return 0;
 }
 
-static void start(const mysql_harness::ConfigSection *section) {
+static void start(mysql_harness::PluginFuncEnv* env) {
+  const mysql_harness::ConfigSection* section = get_config_section(env);
   string name_tag = string();
 
   if (!section->key.empty()) {

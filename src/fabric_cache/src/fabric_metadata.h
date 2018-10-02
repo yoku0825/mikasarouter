@@ -41,6 +41,7 @@ public:
   virtual map<string, list<ManagedShard>> fetch_shards() = 0;
   virtual bool connect() = 0;
   virtual void disconnect() = 0;
+  virtual ~FabricMetaData() = 0;
 };
 
 #endif // FABRIC_CACHE_FABRIC_METADATA_INCLUDED

@@ -58,7 +58,7 @@ public:
    *
    * Disconnect and release the connection to the fabric node.
    */
-  ~Fabric();
+  virtual ~Fabric() = 0;
 
 
   /** @brief Returns relation between group ID and list of servers

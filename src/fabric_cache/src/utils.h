@@ -41,6 +41,7 @@ string get_string(const char *input_str);
 class ValueComparator {
 public:
   virtual int compare(string val_a, string val_b) = 0;
+  virtual ~ValueComparator() = 0;
 };
 
 /** @class IntegerValueComparator

@@ -44,8 +44,8 @@ public:
         address(get_option_tcp_address(section, "address", fabric_cache::kDefaultFabricPort)),
         user(get_option_string(section, "user")) { }
 
-  string get_default(const string &option);
-  bool is_required(const string &option);
+  std::string get_default(const std::string &option) const override;
+  bool is_required(const std::string &option) const override;
 
   /** @brief MySQL Fabric host to connect with */
   const mysql_harness::TCPAddress address;

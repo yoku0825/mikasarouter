@@ -29,7 +29,7 @@
 #include <string>
 #include <thread>
 
-#include "mysql/harness/logger.h"
+#include "mysql/harness/logging/logger.h"
 
 using std::string;
 using std::thread;

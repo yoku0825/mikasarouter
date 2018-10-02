@@ -19,7 +19,7 @@
 #include "plugin_config.h"
 #include "mysqlrouter/datatypes.h"
 #include "mysqlrouter/utils.h"
-#include "mysql/harness/logger.h"
+#include "mysql/harness/logging/logger.h"
 #include "mysql/harness/config_parser.h"
 
 #include <string>

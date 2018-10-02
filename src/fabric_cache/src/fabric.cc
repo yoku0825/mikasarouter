@@ -27,10 +27,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <thread>
+#include <cassert>
 
 #include <mysql.h>
 #include <mysqlrouter/datatypes.h>
-#include "mysqlrouter/logging/logger.h"
+#include "mysql/harness/logging/logger.h"
+
+IMPORT_LOG_FUNCTIONS()
 
 using std::ostringstream;
 

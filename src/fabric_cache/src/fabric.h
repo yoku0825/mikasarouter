@@ -58,7 +58,7 @@ public:
    *
    * Disconnect and release the connection to the fabric node.
    */
-  virtual ~Fabric() = 0;
+  ~Fabric();
 
 
   /** @brief Returns relation between group ID and list of servers
@@ -135,7 +135,7 @@ private:
   bool connected_ = false;
 
   // How many times we tried to reconnected (for logging purposes)
-  size_t reconnect_tries_;
+  int reconnect_tries_;
 };
 
 #endif // FABRIC_CACHE_FABRIC_INCLUDED

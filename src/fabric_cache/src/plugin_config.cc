@@ -30,7 +30,7 @@ using mysqlrouter::string_format;
 using mysqlrouter::to_string;
 using std::invalid_argument;
 
-string FabricCachePluginConfig::get_default(const string &option) {
+string FabricCachePluginConfig::get_default(const string &option) const {
 
   const std::map<string, string> defaults{
       {"address",  fabric_cache::kDefaultFabricAddress},
@@ -43,7 +43,7 @@ string FabricCachePluginConfig::get_default(const string &option) {
   return it->second;
 }
 
-bool FabricCachePluginConfig::is_required(const string &option) {
+bool FabricCachePluginConfig::is_required(const string &option) const {
   const vector<string> required{
       "user",
   };

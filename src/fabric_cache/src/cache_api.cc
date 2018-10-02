@@ -21,6 +21,8 @@
 #include <map>
 #include <memory>
 
+IMPORT_LOG_FUNCTIONS()
+
 std::map<string, std::unique_ptr<FabricCache> > g_fabric_caches;
 std::mutex fabrix_caches_mutex;
 

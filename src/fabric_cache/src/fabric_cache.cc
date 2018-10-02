@@ -20,6 +20,8 @@
 #include <list>
 #include <memory>
 
+IMPORT_LOG_FUNCTIONS()
+
 const map<string, int> FabricCache::shard_type_map_{
     {"RANGE",          RANGE},
     {"RANGE_INTEGER",  RANGE_INTEGER},

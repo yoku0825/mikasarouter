@@ -156,7 +156,6 @@ static void start(mysql_harness::PluginFuncEnv* env) {
     log_error("%s", exc.what());
   } catch (const std::invalid_argument &exc) {
     log_error("%s", exc.what());
-    return;
   }
 }
 

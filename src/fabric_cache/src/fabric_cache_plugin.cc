@@ -32,7 +32,7 @@
 
 
 using fabric_cache::LookupResult;
-using mysqlrouter::TCPAddress;
+using mysql_harness::TCPAddress;
 using std::string;
 IMPORT_LOG_FUNCTIONS()
 

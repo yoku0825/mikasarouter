@@ -51,7 +51,7 @@ bool FabricCachePluginConfig::is_required(const string &option) {
   return std::find(required.begin(), required.end(), option) != required.end();
 }
 
-mysqlrouter::TCPAddress FabricCachePluginConfig::get_option_tcp_address(const mysql_harness::ConfigSection *section,
+mysql_harness::TCPAddress FabricCachePluginConfig::get_option_tcp_address(const mysql_harness::ConfigSection *section,
                                                                         const string &option,
                                                                         uint16_t default_port) {
   std::string value = get_option_string(section, option);
@@ -63,7 +63,7 @@ mysqlrouter::TCPAddress FabricCachePluginConfig::get_option_tcp_address(const my
       bind_info.second = default_port;
     }
 
-    return mysqlrouter::TCPAddress(bind_info.first, bind_info.second);
+    return mysql_harness::TCPAddress(bind_info.first, bind_info.second);
 
   } catch (const std::runtime_error &exc) {
     throw invalid_argument(get_log_prefix(option) + " is incorrect (" + exc.what() + ")");

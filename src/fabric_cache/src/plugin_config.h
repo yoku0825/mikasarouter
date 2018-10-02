@@ -48,7 +48,7 @@ public:
   bool is_required(const string &option);
 
   /** @brief MySQL Fabric host to connect with */
-  const mysqlrouter::TCPAddress address;
+  const mysql_harness::TCPAddress address;
   /** @brief User used for authenticating with MySQL Fabric */
   const string user;
 
@@ -65,9 +65,9 @@ private:
    * @param section Instance of ConfigSection
    * @param option Option name in section
    * @param default_port Use this port when none was provided
-   * @return mysqlrouter::TCPAddress
+   * @return mysql_harness::TCPAddress
    */
-  mysqlrouter::TCPAddress get_option_tcp_address(const mysql_harness::ConfigSection *section,
+  mysql_harness::TCPAddress get_option_tcp_address(const mysql_harness::ConfigSection *section,
                                                  const string &option,
                                                  uint16_t default_port);
 };

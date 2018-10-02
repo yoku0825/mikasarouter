@@ -68,7 +68,7 @@ static bool have_cache_password(const PasswordKey &key) {
 }
 
 static void init(mysql_harness::PluginFuncEnv* env) {
-  g_app_info = get_app_info(env);
+  info = get_app_info(env);
 
   if (info && info->config) {
 

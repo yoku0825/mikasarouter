@@ -152,9 +152,9 @@ static void start(const mysql_harness::ConfigSection *section) {
 
   } catch (const fabric_cache::base_error &exc) {
     // We continue and retry
-    log_error(exc.what());
+    log_error("%s", exc.what());
   } catch (const std::invalid_argument &exc) {
-    log_error(exc.what());
+    log_error("%s", exc.what());
     return;
   }
 }

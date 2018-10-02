@@ -35,13 +35,13 @@ if(WIN32)
     src/plugin_config.cc
     ../router/src/windows/password_vault.cc
     ${FABRIC_CACHE_SOURCES}
-    REQUIRES logger router_lib)
+    REQUIRES router_lib)
 else()
   add_harness_plugin(fabric_cache SOURCES
     src/fabric_cache_plugin.cc
     src/plugin_config.cc
     ${FABRIC_CACHE_SOURCES}
-    REQUIRES logger router_lib)
+    REQUIRES router_lib)
 endif()
 
 target_link_libraries(fabric_cache PUBLIC ${MySQL_LIBRARIES})
@@ -55,14 +55,14 @@ file(GLOB fabric_cache_headers include/mysqlrouter/*.h)
 install(FILES ${fabric_cache_headers}
   DESTINATION include/mysql/${HARNESS_NAME})
 
-if(ENABLE_TESTS)
-    add_subdirectory(tests/)
-endif()
-
-add_executable(cache_test fabric_cache_dev.cc)
-target_link_libraries(cache_test fabric_cache ${MySQL_LIBRARIES})
-if(${CMAKE_SYSTEM_NAME} STREQUAL "SunOS")
-  target_link_libraries(cache_test -lnsl -lsocket)
-endif()
-
-set_target_output_directory(cache_test RUNTIME_OUTPUT_DIRECTORY bin)
+#if(ENABLE_TESTS)
+#    add_subdirectory(tests/)
+#endif()
+#
+#add_executable(cache_test fabric_cache_dev.cc)
+#target_link_libraries(cache_test fabric_cache ${MySQL_LIBRARIES})
+#if(${CMAKE_SYSTEM_NAME} STREQUAL "SunOS")
+#  target_link_libraries(cache_test -lnsl -lsocket)
+#endif()
+#
+#set_target_output_directory(cache_test RUNTIME_OUTPUT_DIRECTORY bin)

@@ -24,7 +24,7 @@
 #include <map>
 #include <vector>
 
-#include "logger.h"
+#include "mysql/harness/logging/logging.h"
 
 using mysqlrouter::string_format;
 using mysqlrouter::to_string;

@@ -30,7 +30,7 @@
 
 #include <mysql.h>
 #include <mysqlrouter/datatypes.h>
-#include "logger.h"
+#include "mysqlrouter/logging/logger.h"
 
 using std::ostringstream;
 

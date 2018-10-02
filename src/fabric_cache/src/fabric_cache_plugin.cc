@@ -123,8 +123,6 @@ static void init(mysql_harness::PluginFuncEnv* env) {
       fabric_cache_passwords.emplace(std::make_pair(password_key, password));
     }
   }
-
-  return 0;
 }
 
 static void start(mysql_harness::PluginFuncEnv* env) {

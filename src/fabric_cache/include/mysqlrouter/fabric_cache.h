@@ -25,6 +25,9 @@
 #include <string>
 
 #include "mysqlrouter/utils.h"
+#include "mysqlrouter/datatypes.h"
+#include "mysql_router_thread.h"
+#include "tcp_address.h"
 
 #ifdef _WIN32
 #  ifdef fabric_cache_STATIC

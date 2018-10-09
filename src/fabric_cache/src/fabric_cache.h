@@ -58,6 +58,9 @@ public:
    * Starts the Fabric Cache and launch thread.
    */
   void start();
+  void stop() noexcept;
+  static void* run_thread(void* context);
+  void refresh_thread();
 
   /** @brief Returns list of managed servers in a group
    *
@@ -89,9 +92,14 @@ public:
 
   std::shared_ptr<FabricMetaData> fabric_meta_data_;
 
-  thread refresh_thread_;
+  // thread refresh_thread_;
 
   std::mutex cache_refreshing_mutex_;
+
+private:
+
+  /** @brief refresh thread facade */
+  mysql_harness::MySQLRouterThread refresh_thread_;
 };
 
 #endif // FABRIC_CACHE_FABRIC_CACHE_INCLUDED

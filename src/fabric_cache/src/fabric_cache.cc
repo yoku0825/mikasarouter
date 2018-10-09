@@ -16,6 +16,7 @@
 */
 
 #include "fabric_cache.h"
+#include "mysql/harness/logging/logging.h"
 
 #include <list>
 #include <memory>
@@ -59,27 +60,43 @@ FabricCache::FabricCache(string host, int port, string user, string password,
   refresh();
 }
 
-FabricCache::~FabricCache() {
-  terminate_ = true;
-  if (refresh_thread_.joinable()) {
-    refresh_thread_.join();
+void FabricCache::start() {
+  // Start the Fabric Cache refresh thread
+  refresh_thread_.run(&run_thread, this);
+}
+
+void* FabricCache::run_thread(void* context) {
+  FabricCache* fabric_cache = static_cast<FabricCache*>(context);
+  fabric_cache->refresh_thread();
+  return nullptr;
+}
+
+void FabricCache::refresh_thread() {
+  //mysql_harness::rename_thread("FabricCache Refresh");
+
+  while (!terminate_) {
+    refresh();
+
+    auto ttl_left = ttl_;
+    // wait for up to TTL until next refresh, unless some replicaset loses an
+    // online (primary or secondary) server - in that case, "emergency mode" is
+    // enabled and we refresh every 1s until "emergency mode" is called off.
+    while (1) {
+      if (terminate_) return;
+
+      std::this_thread::sleep_for(std::chrono::seconds(ttl_left));
+    }
   }
 }
 
-void FabricCache::start() {
-  // Start the Fabric Cache refresh thread
-  auto refresh_loop = [this] {
-    while (!terminate_) {
-      if (fabric_meta_data_->connect()) {
-        refresh();
-      } else {
-        fabric_meta_data_->disconnect();
-      }
-      std::this_thread::sleep_for(
-          std::chrono::seconds(ttl_ == 0 ? kDefaultTimeToLive : ttl_));
-    }
-  };
-  thread(refresh_loop).join();
+
+
+/**
+ * Stop the refresh thread.
+ */
+void FabricCache::stop() noexcept {
+  terminate_ = true;
+  refresh_thread_.join();
 }
 
 list<ManagedServer> FabricCache::group_lookup(const string &group_id) {

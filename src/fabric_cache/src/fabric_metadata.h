@@ -28,7 +28,6 @@ using std::list;
 using std::map;
 using std::string;
 using fabric_cache::ManagedServer;
-using fabric_cache::ManagedShard;
 
 /**
  * The fabric metadata class is used to create a pluggable transport layer
@@ -38,7 +37,6 @@ class FabricMetaData {
 public:
   virtual int fetch_ttl() = 0;
   virtual map<string, list<ManagedServer>> fetch_servers() = 0;
-  virtual map<string, list<ManagedShard>> fetch_shards() = 0;
   virtual bool connect() = 0;
   virtual void disconnect() = 0;
   virtual ~FabricMetaData() = 0;

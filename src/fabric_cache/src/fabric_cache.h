@@ -34,7 +34,6 @@
 using std::string;
 using std::thread;
 using fabric_cache::ManagedServer;
-using fabric_cache::ManagedShard;
 
 const int kDefaultTimeToLive = 10;
 
@@ -69,30 +68,6 @@ public:
    */
   list<ManagedServer> group_lookup(const string &group_id);
 
-  /** @brief Returns list of managed servers using sharding table and key
-   *
-   * Returns list of managed servers using sharding table and key.
-   *
-   * @param table_name The string representing the table name being sharded.
-   * @param shard_key The shard key that needs to be looked up.
-   * @return std::list containing ManagedServer objects
-   */
-  list<ManagedServer> shard_lookup(const string &table_name, const string &shard_key);
-
-private:
-  enum shard_type_enum_ {
-    RANGE, RANGE_INTEGER, RANGE_DATETIME, RANGE_STRING,
-    HASH
-  };
-
-  /**
-   * Copy source shard to the destination shard.
-   *
-   * @param source_shard Source shard structure.
-   * @param destn_shard Destination shard structure.
-   */
-  void copy(const ManagedShard &source_shard, ManagedShard &destn_shard);
-
   /** @brief Fetches all data from Fabric
    *
    * Fetches all data from Fabric and stores it internally.
@@ -105,23 +80,10 @@ private:
    */
   void refresh();
 
-  /** @brief Returns instance of key comparator for Sharding
-   *
-   * Returns instance of the appropriated key comparator for Sharding.
-   *
-   * @param shard_type The sharding type for which the keys need to be compared.
-   * @return Comparator class implementation.
-   */
-  ValueComparator *fetch_value_comparator(string shard_type);
-
   map<string, list<ManagedServer>> group_data_;
-  map<string, list<ManagedShard>> shard_data_;
   int ttl_;
 
   map<string, list<ManagedServer>> group_data_temp_;
-  map<string, list<ManagedShard>> shard_data_temp_;
-
-  static const map<string, int> shard_type_map_;
 
   bool terminate_;
 

@@ -22,8 +22,6 @@
 #include <thread>
 
 const string kDefaultTestGroup = "group-1";  // group-1
-const string kDefaultTestShardTable = "db1.t1";  // db1.t1
-const string kTestShardKey = "100";  // 100
 const string kDefaultFabricHost = "127.0.0.1";  // 127.0.0.1
 const string kDefaultFabricUser = "admin";  // admin
 const string kDefaultFabricPassword = "";  //
@@ -67,7 +65,6 @@ void print_server_condensed(list<ManagedServer> server_list) {
 
 int main() {
   list<ManagedServer> server_list_1;
-  list<ManagedServer> server_list_2;
   string cache_name = "maintest";
   try {
     thread connect_thread(
@@ -87,9 +84,6 @@ int main() {
       server_list_1 = fabric_cache::lookup_group(cache_name, kDefaultTestGroup).
         server_list;
       print_server_condensed(server_list_1);
-      server_list_2 = fabric_cache::lookup_shard(cache_name,
-                                                 kDefaultTestShardTable,
-                                                 kTestShardKey).server_list;
       print_server_condensed(server_list_1);
     } catch (const fabric_cache::base_error &exc) {
       cout << exc.what() << endl;

@@ -69,14 +69,6 @@ public:
    */
   map<string, list<ManagedServer>> fetch_servers();
 
-  /** @brief Returns relation between shard ID and list of servers
-   *
-   * Returns relation as a std::map between shard ID and list of managed servers.
-   *
-   * @return Map of shard ID, shard details pair.
-   */
-  map<string, list<ManagedShard>> fetch_shards();
-
   /** @brief Returns the refresh interval provided by Fabric
    *
    * Returns the refresh interval (also known as TTL) provided by Fabric.

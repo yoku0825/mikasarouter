@@ -54,22 +54,9 @@ public:
   list<ManagedServer> group_3_list;
 
   /**
-   * Shard objects represent the information about the shard in the topology.
-   */
-  ManagedShard shard1;
-  ManagedShard shard2;
-
-  list<ManagedShard> table_1_list;
-
-  /**
    * The information about the HA topology being managed by Fabric.
    */
   map<string, list<ManagedServer>> group_map;
-
-  /**
-   * The information about the shards present in Fabric.
-   */
-  map<string, list<ManagedShard>> shard_map;
 
   /** @brief Constructor
    * @param host The host on which the fabric server is running.
@@ -115,15 +102,6 @@ public:
    * @return Map of group ID, server list pairs.
    */
   map<string, list<ManagedServer>> fetch_servers();
-
-  /**
-   *
-   * Returns relation as a std::map between shard ID and list of managed
-   * servers.
-   *
-   * @return Map of shard ID, shard details pair.
-   */
-  map<string, list<ManagedShard>> fetch_shards();
 
   /**
    *

@@ -226,40 +226,6 @@ map<string, list<ManagedServer>> Fabric::fetch_servers() {
   return server_map;
 }
 
-map<string, list<ManagedShard>> Fabric::fetch_shards() {
-  string api = "dump.sharding_information";
-
-  map<string, list<ManagedShard>> shard_map;
-
-  MYSQL_ROW row = nullptr;
-  MYSQL_RES *result = fetch_metadata(api);
-
-  if (!result) {
-    throw fabric_cache::metadata_error("Failed executing " + api);
-  }
-
-  while ((row = mysql_fetch_row(result)) != nullptr) {
-    ManagedShard sh;
-    sh.schema_name = get_string(row[0]);
-    sh.table_name = get_string(row[1]);
-    sh.column_name = get_string(row[2]);
-    sh.lb = get_string(row[3]);
-    sh.shard_id = atoi(row[4]);
-    sh.type_name = get_string(row[5]);
-    sh.group_id = get_string(row[6]);
-    sh.global_group = get_string(row[7]);
-
-    ostringstream ss;
-    ss << sh.schema_name << "." << sh.table_name;
-    string fully_qualified_table_name = ss.str();
-    shard_map[fully_qualified_table_name].push_back(sh);
-  }
-
-  mysql_free_result(result);
-
-  return shard_map;
-}
-
 int Fabric::fetch_ttl() {
   return ttl_;
 }

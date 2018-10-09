@@ -117,29 +117,6 @@ MockFabric::MockFabric(const string &host, int port, const string &user,
   group_map["group-1"] = group_1_list;
   group_map["group-2"] = group_2_list;
   group_map["group-3"] = group_3_list;
-
-  shard1.schema_name = "db1";
-  shard1.table_name = "t1";
-  shard1.column_name = "empno";
-  shard1.lb = "1";
-  shard1.shard_id = 1;
-  shard1.type_name = "RANGE_INTEGER";
-  shard1.group_id = "group-2";
-  shard1.global_group = "group-1";
-
-  shard2.schema_name = "db1";
-  shard2.table_name = "t1";
-  shard2.column_name = "empno";
-  shard2.lb = "1000";
-  shard2.shard_id = 2;
-  shard2.type_name = "RANGE_INTEGER";
-  shard2.group_id = "group-3";
-  shard2.global_group = "group-1";
-
-  table_1_list.push_back(shard1);
-  table_1_list.push_back(shard2);
-
-  shard_map["db1.t1"] = table_1_list;
 }
 
 /** @brief Destructor
@@ -175,17 +152,6 @@ bool MockFabric::connect() noexcept {
  * @return a boolean to indicate if the connection was successful.
  */
 void MockFabric::disconnect() noexcept {
-}
-
-/**
- *
- * Returns relation as a std::map between shard ID and list of managed
- * servers.
- *
- * @return Map of shard ID, shard details pair.
- */
-map<string, list<ManagedShard>> MockFabric::fetch_shards() {
-  return shard_map;
 }
 
 /**

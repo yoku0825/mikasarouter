@@ -72,14 +72,5 @@ LookupResult lookup_group(const string &cache_name, const string &group_id) {
   return LookupResult(cache->second->group_lookup(group_id));
 }
 
-LookupResult lookup_shard(const string &cache_name, const string &table_name,
-                          const string &shard_key) {
-  auto cache = g_fabric_caches.find(cache_name);
-  if (cache == g_fabric_caches.end()) {
-    throw fabric_cache::base_error("Fabric Cache '" + cache_name + "' not initialized");
-  }
-  return LookupResult(cache->second->shard_lookup(table_name, shard_key));
-}
-
 } // namespace fabric_cache
 

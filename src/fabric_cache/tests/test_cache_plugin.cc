@@ -35,10 +35,6 @@
 const string kDefaultTestGroup_1 = "group-1";  // group-1
 const string kDefaultTestGroup_2 = "group-2";  // group-2
 
-const string kDefaultTestShardTable = "db1.t1";  // db1.t1
-const string kTestShardKey_1 = "100";  // 100
-const string kTestShardKey_2 = "1000";  // 1000
-const string kTestShardKey_3 = "10000";  // 10000
 const string kDefaultFabricHost = "127.0.0.1";  // 127.0.0.1
 const string kDefaultFabricUser = "admin";  // admin
 const string kDefaultFabricPassword = "";  //
@@ -109,58 +105,6 @@ TEST_F(FabricCachePluginTest, ValidGroupTest) {
   server_list_1.pop_front();
   ManagedServer ms2_fetched = server_list_1.front();
   EXPECT_EQ(ms2_fetched, mf.ms2);
-}
-
-/**
- * Test the list of servers that are part of a shard in fabric.
- */
-TEST_F(FabricCachePluginTest, ValidShardTest_1) {
-  list<ManagedServer> server_list_2 = fabric_cache::lookup_shard(cache_name,
-                                             kDefaultTestShardTable,
-                                             kTestShardKey_1).server_list;
-  ManagedServer ms3_fetched = server_list_2.front();
-  EXPECT_EQ(ms3_fetched, mf.ms3);
-  server_list_2.pop_front();
-  ManagedServer ms4_fetched = server_list_2.front();
-  EXPECT_EQ(ms4_fetched, mf.ms4);
-}
-
-/**
- * Test the list of servers that are part of a shard in fabric.
- */
-TEST_F(FabricCachePluginTest, ValidShardTest_2) {
-  list<ManagedServer> server_list_2 = fabric_cache::lookup_shard(cache_name,
-                                             kDefaultTestShardTable,
-                                             kTestShardKey_2).server_list;
-  ManagedServer ms5_fetched = server_list_2.front();
-  EXPECT_EQ(ms5_fetched, mf.ms5);
-  server_list_2.pop_front();
-  ManagedServer ms6_fetched = server_list_2.front();
-  EXPECT_EQ(ms6_fetched, mf.ms6);
-}
-
-/**
- * Test the list of servers that are part of a shard in fabric.
- */
-TEST_F(FabricCachePluginTest, ValidShardTest_3) {
-  list<ManagedServer> server_list_2 = fabric_cache::lookup_shard(cache_name,
-                                             kDefaultTestShardTable,
-                                             kTestShardKey_3).server_list;
-  ManagedServer ms5_fetched = server_list_2.front();
-  EXPECT_EQ(ms5_fetched, mf.ms5);
-  server_list_2.pop_front();
-  ManagedServer ms6_fetched = server_list_2.front();
-  EXPECT_EQ(ms6_fetched, mf.ms6);
-}
-
-/**
- * Test that the list of servers in a invalid shard is empty.
- */
-TEST_F(FabricCachePluginTest, InvalidShardTest) {
-  list<ManagedServer> server_list_2 = fabric_cache::lookup_shard(cache_name,
-                                             "InvalidShardTable",
-                                             kTestShardKey_3).server_list;
-  EXPECT_TRUE(server_list_2.empty());
 }
 
 int main(int argc, char *argv[])

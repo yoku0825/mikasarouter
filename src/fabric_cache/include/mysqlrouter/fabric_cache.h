@@ -98,30 +98,6 @@ public:
   static std::map<Status, string> StatusNames;
 };
 
-/** @class ManagedShard
- *
- * Class ManagedShard represents a shard managed by MySQL Fabric.
- */
-class ManagedShard {
-public:
-  /** @brief The database name of the table being sharded */
-  string schema_name;
-  /** @brief The name of the table being sharded */
-  string table_name;
-  /** @brief The column containing the shard key based on which the partioning of the table is performed */
-  string column_name;
-  /** @brief The lower bound associated with the particular shard ID */
-  string lb;
-  /** @brief The integer containing the unique ID of the shard */
-  int shard_id;
-  /** @brief The type of the sharding key for the sharding definition */
-  string type_name;
-  /** @brief The ID of the group on which the shard is present */
-  string group_id;
-  /** @brief The global group from which all the shard groups replicate global information */
-  string global_group;
-};
-
 /** @class base_error
  *
  * Class base_error is base class for exceptions used by the Fabric Cache
@@ -212,19 +188,6 @@ bool FABRIC_CACHE_API have_cache(const string &cache_name);
  * @return List of ManagedServer objects
  */
 LookupResult FABRIC_CACHE_API lookup_group(const string &cache_name, const string &group_id);
-
-/** @brief Returns list of managed server for a shard
- *
- * Returns a list of MySQL server managed by MySQL Fabric for a shard. The
- * shard is defined by table_name and shard_key.
- *
- * @param cache_name Name of the Fabric Cache instance
- * @param table_name Shard table name
- * @param shard_key Sharding key
- * @return List of ManagedServer objects
- */
-LookupResult FABRIC_CACHE_API lookup_shard(const string &cache_name, const string &table_name,
-                          const string &shard_key);
 
 } // namespace fabric_cache
 
